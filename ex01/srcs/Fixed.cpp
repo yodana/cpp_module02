@@ -6,7 +6,7 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:27:29 by yodana            #+#    #+#             */
-/*   Updated: 2022/06/22 09:46:34 by yodana           ###   ########.fr       */
+/*   Updated: 2022/06/22 14:20:14 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 #include "../includes/Fixed.hpp"
 
 Fixed::Fixed(void):_valeur(0){
+    std::cout << "Default constructor called" << std::endl;
+    return ;
+}
+
+Fixed::Fixed(int const e){
+    // mettre e sous la forme de 8 bits => 00001000
+    // changer la partie fractionnaire pour le nombre a virgule 
+    this->_valeur = e;
+    std::cout << "Default constructor called" << std::endl;
+    return ;
+}
+
+Fixed::Fixed(float const f):_valeur(0){
+    (void)f;
     std::cout << "Default constructor called" << std::endl;
     return ;
 }
@@ -42,4 +56,9 @@ Fixed& Fixed::operator=(Fixed const & rhs){
     if (this != &rhs)
         this->_valeur = rhs.getRawBits();
     return *this;
+}
+
+std::ostream & operator<<(std::ostream& o, Fixed const & i){
+    o << i.getRawBits();
+    return o;
 }
