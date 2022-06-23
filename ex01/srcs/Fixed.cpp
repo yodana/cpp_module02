@@ -6,12 +6,13 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:27:29 by yodana            #+#    #+#             */
-/*   Updated: 2022/06/22 14:20:14 by yodana           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:25:16 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../includes/Fixed.hpp"
+#include <cmath>
 
 Fixed::Fixed(void):_valeur(0){
     std::cout << "Default constructor called" << std::endl;
@@ -20,15 +21,16 @@ Fixed::Fixed(void):_valeur(0){
 
 Fixed::Fixed(int const e){
     // mettre e sous la forme de 8 bits => 00001000
-    // changer la partie fractionnaire pour le nombre a virgule 
-    this->_valeur = e;
-    std::cout << "Default constructor called" << std::endl;
+    // changer la partie fractionnaire pour le nombre a virgule
+    this->_valeur = e << (this->_bits);    
+    std::cout << "Constructor int called " << this->_valeur << std::endl;
     return ;
 }
 
-Fixed::Fixed(float const f):_valeur(0){
-    (void)f;
-    std::cout << "Default constructor called" << std::endl;
+Fixed::Fixed(float const f){
+    this->_valeur = (int)std::roundf(f) << (this->_bits);
+    
+    std::cout << "Constructor float called " << this->_valeur << std::endl;
     return ;
 }
 
@@ -46,6 +48,14 @@ Fixed::Fixed(Fixed const &src){
     *this = src;
 }
 
+float Fixed::toFloat(void) const{
+    return (float)(this->_valeur >> this->_bits);
+}
+
+int Fixed::toInt(void) const{
+    return (int)this->_valeur;
+}
+
 int Fixed::getRawBits(void) const{
     std::cout << "getRawBits member function called" << std::endl;
     return this->_valeur;
@@ -59,6 +69,6 @@ Fixed& Fixed::operator=(Fixed const & rhs){
 }
 
 std::ostream & operator<<(std::ostream& o, Fixed const & i){
-    o << i.getRawBits();
+    o << i.toFloat();
     return o;
 }

@@ -6,7 +6,7 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:34:49 by yodana            #+#    #+#             */
-/*   Updated: 2022/06/22 13:44:27 by yodana           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:45:19 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Fixed{
         Fixed & operator=(Fixed const & rhs);
         int getRawBits(void) const;
         void setRawBits(int const raw);
+        float toFloat(void) const;
+        int toInt(void) const;
 
     private:
        int _valeur;
