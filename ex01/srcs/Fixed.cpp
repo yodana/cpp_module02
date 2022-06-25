@@ -29,7 +29,29 @@ Fixed::Fixed(int const e){
 
 Fixed::Fixed(float const f){
     this->_valeur = (int)std::roundf(f) << (this->_bits);
-    
+    float e = 0;
+    float r = 1;
+    int i = 0;
+    int b = 0;
+
+    while(i <= 7){
+        if ((e + r) <= (f - (int)std::roundf(f))){
+            b = b |	1;
+            e = e + r;
+        }
+        b = b << 1;
+        r = r / 2;
+        std::cout << "valeur de b " << b << std::endl;
+        std::cout << "valeur de e " << e << std::endl;
+        std::cout << "valeur de r " << r << std::endl;
+        i++;
+    }
+    // pour la partie fractionnaire si f > 2^-n alors diviser f par 2 et mettre 1 pour le binaire  et passer au 2^n suivant
+    // sinon juste passer au 2^-n suivant
+
+    std::cout << "valeur de f " << f << std::endl;
+    std::cout << "valeur de b " << b << std::endl;
+    this->_valeur = this->_valeur | b;
     std::cout << "Constructor float called " << this->_valeur << std::endl;
     return ;
 }
