@@ -6,7 +6,7 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:27:29 by yodana            #+#    #+#             */
-/*   Updated: 2022/06/23 15:25:16 by yodana           ###   ########.fr       */
+/*   Updated: 2022/06/28 14:13:59 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 #include "../includes/Fixed.hpp"
 #include <cmath>
 
+int my_pow(int power){
+    int r = 1;
+    while(power != 0){
+        r = r * 2;
+        power--;
+    }
+    return r;
+}
+
 Fixed::Fixed(void):_valeur(0){
     std::cout << "Default constructor called" << std::endl;
     return ;
 }
 
 Fixed::Fixed(int const e){
-    this->_valeur = e << (this->_bits);    
+    setRawBits(e << (this->_bits));
+    std::cout << "Int constructor called" << std::endl;    
     return ;
 }
 
 Fixed::Fixed(float const f){
-    this->_valeur = std::roundf(f * pow(2,this->_bits));
+    setRawBits(std::roundf(f * my_pow(this->_bits)));
+    std::cout << "Float constructor called " << this->_valeur << std::endl;
     return ;
 }
 
@@ -57,7 +68,7 @@ float Fixed::toFloat(void) const{
         r = r / 2;
         mask = mask / 2;
     }
-    return e;
+    return f + e;
 }
 
 int Fixed::toInt(void) const{
@@ -65,7 +76,6 @@ int Fixed::toInt(void) const{
 }
 
 int Fixed::getRawBits(void) const{
-    std::cout << "getRawBits member function called" << std::endl;
     return this->_valeur;
 }
 
