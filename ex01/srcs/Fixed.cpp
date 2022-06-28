@@ -20,39 +20,12 @@ Fixed::Fixed(void):_valeur(0){
 }
 
 Fixed::Fixed(int const e){
-    // mettre e sous la forme de 8 bits => 00001000
-    // changer la partie fractionnaire pour le nombre a virgule
     this->_valeur = e << (this->_bits);    
-    std::cout << "Constructor int called " << this->_valeur << std::endl;
     return ;
 }
 
 Fixed::Fixed(float const f){
-    this->_valeur = (int)std::roundf(f) << (this->_bits);
-    float e = 0;
-    float r = 1;
-    int i = 0;
-    int b = 0;
-
-    while(i <= 7){
-        if ((e + r) <= (f - (int)std::roundf(f))){
-            b = b |	1;
-            e = e + r;
-        }
-        b = b << 1;
-        r = r / 2;
-        std::cout << "valeur de b " << b << std::endl;
-        std::cout << "valeur de e " << e << std::endl;
-        std::cout << "valeur de r " << r << std::endl;
-        i++;
-    }
-    // pour la partie fractionnaire si f > 2^-n alors diviser f par 2 et mettre 1 pour le binaire  et passer au 2^n suivant
-    // sinon juste passer au 2^-n suivant
-
-    std::cout << "valeur de f " << f << std::endl;
-    std::cout << "valeur de b " << b << std::endl;
-    this->_valeur = this->_valeur | b;
-    std::cout << "Constructor float called " << this->_valeur << std::endl;
+    this->_valeur = std::roundf(f * pow(2,this->_bits));
     return ;
 }
 
@@ -71,11 +44,24 @@ Fixed::Fixed(Fixed const &src){
 }
 
 float Fixed::toFloat(void) const{
-    return (float)(this->_valeur >> this->_bits);
+    float e = (float)(this->_valeur >> this->_bits);
+    int mask = 255;
+    int b = this->_valeur & mask;
+    float r = 0.5;
+    float f = 0;
+    mask = 128;
+    for(int i = 0; i < this->_bits; i++){
+        if ((b & mask) == mask){
+            f = f + r;
+        }
+        r = r / 2;
+        mask = mask / 2;
+    }
+    return e;
 }
 
 int Fixed::toInt(void) const{
-    return (int)this->_valeur;
+    return (int)(this->_valeur >> this->_bits);
 }
 
 int Fixed::getRawBits(void) const{
