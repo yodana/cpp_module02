@@ -62,7 +62,6 @@ class Fixed{
             return rhos;
         }
         
-        
     private:
        int _valeur;
        static int const _bits = 8;

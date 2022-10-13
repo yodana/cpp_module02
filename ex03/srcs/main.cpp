@@ -16,55 +16,21 @@
 bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 int main( void ) {
-/*bool test = a>b;
-std::cout << "> is " << test << std::endl;
-test =  a<b;
-std::cout << "< is " << test << std::endl;
-test =  b==d;
-std::cout << "== is " << test << std::endl;
-test =  d!=b;
-std::cout << "!= is " <<test << std::endl;
-test =  a>=b;
-std::cout << ">= is " << test  << std::endl;
-test =  a<=b;
-std::cout << "<= is " << test << std::endl;
-Fixed tes = a+b;
-std::cout << "+ is " << tes << std::endl;
-tes =  a-b;
-std::cout << "- is " << tes << std::endl;
-tes =  a/b;
-std::cout << "/ is " << tes << std::endl;
-tes =  a*b;
-std::cout << "* is " <<tes << std::endl;
-Fixed e;
-tes =  e++;
-std::cout << "post + " << tes << std::endl;
-std::cout << "post + " << e << std::endl;
-tes =  ++e;
-std::cout << "pre + " << tes << std::endl;
-std::cout << "pre + " << e << std::endl;
-tes =  e--;
-std::cout << "post - " << tes << std::endl;
-std::cout << "post - " << e << std::endl;
-tes =  --e;
-std::cout << "pre - " << tes << std::endl;
-std::cout << "pre - " << e << std::endl;*/
+Point a(1, 1);
+const Point b(2, 2);
+const Point c(3, 1);
+const Point point(1.75, 1.5);
 
-/**Fixed a;
-Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-std::cout << a << std::endl;
-std::cout << ++a << std::endl;
-std::cout << a << std::endl;
-std::cout << a++ << std::endl;
-std::cout << a << std::endl;
-std::cout << b << std::endl;
-std::cout << Fixed::min( a, b ) << std::endl;
-;**/
-Point a(10, 1);
-const Point b(5, 2);
-const Point c(4, 3);
-const Point point(2, 2);
+if (bsp(a, b, c, point))
+    std::cout << "Point dans le triangle" << std::endl;
+else
+    std::cout << "Point pas dans le triangle" << std::endl;
 
-bsp(a, b, c, point);
+const Point other_point(10, 1.5);
+
+if (bsp(a, b, c, other_point))
+    std::cout << "Point dans le triangle" << std::endl;
+else
+    std::cout << "Point pas dans le triangle" << std::endl;
 return 0;
 }

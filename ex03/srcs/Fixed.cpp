@@ -93,15 +93,15 @@ bool Fixed::operator<(Fixed const & rhs) const{
 }
 
 bool Fixed::operator>=(Fixed const & rhs) const{
-    if(rhs.toFloat() >= this->toFloat())
-        return 0;
-    return 1;
+    if(this->toFloat() >= rhs.toFloat())
+        return 1;
+    return 0;
 }
 
 bool Fixed::operator<=(Fixed const & rhs) const{
-    if(rhs.toFloat() <= this->toFloat())
-        return 0;
-    return 1;
+    if(this->toFloat() <= rhs.toFloat())
+        return 1;
+    return 0;
 }
 
 bool Fixed::operator==(Fixed const & rhs) const{

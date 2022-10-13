@@ -22,6 +22,9 @@ class Point{
                 d = d * -1;
             return (c + d);
         }
+        static Fixed coeff(Point a, Point b){
+            return Fixed((a._y - b._y) / (a._x - b._x));
+        }
 
     private:
         const Fixed _x;
@@ -30,5 +33,4 @@ class Point{
 
 std::ostream & operator<<(std::ostream& o, Point const & point);
 bool bsp( Point const a, Point const b, Point const c, Point const point);
-bool test(Point const t);
 #endif
