@@ -6,7 +6,7 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:27:29 by yodana            #+#    #+#             */
-/*   Updated: 2022/10/11 19:48:31 by yodana           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:23:17 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,20 @@ int my_pow(int power){
 }
 
 Fixed::Fixed(void):_valeur(0){
-    std::cout << "Default constructor called" << std::endl;
     return ;
 }
 
 Fixed::Fixed(int const e){
     setRawBits(e << (this->_bits));
-    std::cout << "Int constructor called" << std::endl;    
     return ;
 }
 
 Fixed::Fixed(float const f){
     setRawBits(std::roundf(f * my_pow(this->_bits)));
-    std::cout << "Float constructor called" << std::endl;
     return ;
 }
 
 Fixed::~Fixed(void){
-    std::cout << "Destructor called" << std::endl;
     return ;
 }
 
@@ -50,7 +46,6 @@ void Fixed::setRawBits(int const raw){
 }
 
 Fixed::Fixed(Fixed const &src){
-    std::cout << "Copy constructor called" << std::endl;
     *this = src;
 }
 
@@ -80,7 +75,6 @@ int Fixed::getRawBits(void) const{
 }
 
 Fixed& Fixed::operator=(Fixed const & rhs){
-    std::cout << "Copy assignment operator called" << std::endl;
     if (this != &rhs)
         this->_valeur = rhs.getRawBits();
     return *this;

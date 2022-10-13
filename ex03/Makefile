@@ -1,7 +1,7 @@
 NAME		=	fixed
 
-SRC 		= 	main.cpp Fixed.cpp
-HEADERS		=	Fixed.hpp
+SRC 		= 	main.cpp Fixed.cpp Point.cpp bsp.cpp
+HEADERS		=	Fixed.hpp Point.hpp
 
 SRC_FOLDER	=	srcs/
 BIN_FOLDER	=	bin
