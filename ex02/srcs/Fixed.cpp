@@ -6,7 +6,7 @@
 /*   By: yodana <yodana@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 09:27:29 by yodana            #+#    #+#             */
-/*   Updated: 2022/10/12 12:55:46 by yodana           ###   ########.fr       */
+/*   Updated: 2022/10/13 16:23:27 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,10 @@ Fixed Fixed::operator*(Fixed const & rhs) const{
 }
 
 Fixed Fixed::operator/(Fixed const & rhs) const{
-    if (rhs.toFloat() == 0)
+    if (rhs.toFloat() == 0){
+        std::cout << "Division by zero don t use it!" << std::endl;
         return Fixed(0);
+    }
     return Fixed(this->toFloat() / rhs.toFloat());
 }
 
